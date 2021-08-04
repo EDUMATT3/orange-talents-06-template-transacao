@@ -1,5 +1,7 @@
 package com.edumatt3.transacao.consumer.messages;
 
+import com.edumatt3.transacao.compras.Transacao;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -11,9 +13,9 @@ public class EventoDeTransacao {
 
     private LocalDateTime efetivadaEm;
 
-    private Estabelecimento estabelecimento;
+    private EstabelecimentoMessage estabelecimento;
 
-    private Cartao cartao;
+    private CartaoMessage cartao;
 
     public String getId() {
         return id;
@@ -27,23 +29,21 @@ public class EventoDeTransacao {
         return efetivadaEm;
     }
 
-    public Estabelecimento getEstabelicimento() {
+    public EstabelecimentoMessage getEstabelecimento() {
         return estabelecimento;
     }
 
-    public Cartao getCartao() {
+    public CartaoMessage getCartao() {
         return cartao;
     }
 
-    @Override
-    public String toString() {
-        return "EventoDeTransacao{" +
-                "id='" + id + '\'' +
-                ", valor=" + valor +
-                ", efetivadaEm=" + efetivadaEm +
-                ", estabelicimento=" + estabelecimento +
-                ", cartao=" + cartao +
-                '}';
+    public String getCartaoId() {
+        return this.cartao.getId();
+    }
+
+
+    public Transacao toModel() {
+        return new Transacao(id, valor, efetivadaEm, estabelecimento.getNome(), cartao.getId());
     }
 }
 

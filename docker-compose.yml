@@ -39,6 +39,16 @@ services:
     networks:
       - transacoes-network
 
+  postgres:
+    image: 'postgres:alpine'
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: transacoes
+      POSTGRES_PASSWORD: transacoespwd
+    networks:
+      - transacoes-network
+
 networks:
   transacoes-network:
     driver: bridge
